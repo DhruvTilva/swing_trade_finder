@@ -1,0 +1,12 @@
+
+flask
+pandas
+numpy
+yfinance
+ta
+apscheduler
+requests
+feedparser
+nltk
+scikit-learn
+joblib

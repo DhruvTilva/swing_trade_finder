@@ -1,0 +1,45 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Swing Momentum Finder (NSE/BSE)</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Swing Momentum Finder</h1>
+    <p>
+      Scan NSE &amp; BSE stocks using ML + technicals + sentiment
+      and show top {{ top_n }} candidates for 15/30/60/90 days.
+    </p>
+
+    <button id="start-btn">Start Finding</button>
+    <span id="loader" class="hidden">Analyzing... this can take some time.</span>
+    <p id="status"></p>
+
+    <table id="result-table" class="hidden">
+      <thead>
+        <tr>
+          <th>Symbol</th>
+          <th>Last</th>
+          <th>+15d%</th>
+          <th>+30d%</th>
+          <th>+60d%</th>
+          <th>+90d%</th>
+          <th>Target 90d</th>
+          <th>Stop Loss</th>
+          <th>Sentiment</th>
+          <th>Rationale</th>
+        </tr>
+      </thead>
+      <tbody id="results"></tbody>
+    </table>
+
+    <p class="note">
+      Educational only. Not financial advice.
+    </p>
+  </div>
+  <script src="/static/app.js"></script>
+</body>
+</html>
