@@ -7,18 +7,14 @@ from config import SCHEDULE_HOUR, SCHEDULE_MINUTE
 app = Flask(__name__)
 LATEST_RESULTS = []
 
-# =======================
 # SCHEDULED JOB
-# =======================
 def run_daily_analysis():
     global LATEST_RESULTS
     results, _ = analyze_all_stocks()
     LATEST_RESULTS = results
     notify_analysis_done(results)
 
-# =======================
 # ROUTES
-# =======================
 @app.route("/")
 def index():
     return render_template("index.html")
@@ -38,9 +34,25 @@ def analyze():
 def last_results():
     return jsonify(LATEST_RESULTS)
 
-# =======================
+@app.route("/analyze-all", methods=["POST"])
+def analyze_all():
+    from analysis import analyze_all_csv_stocks
+
+    results = analyze_all_csv_stocks()
+
+    if not results:
+        return jsonify({
+            "status": "empty",
+            "message": "No valid stocks found"
+        })
+
+    return jsonify({
+        "status": "ok",
+        "data": results
+    })
+
+
 # APP START
-# =======================
 if __name__ == "__main__":
     scheduler = BackgroundScheduler()
     scheduler.add_job(

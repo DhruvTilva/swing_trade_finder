@@ -69,18 +69,16 @@ def fetch_history(symbol: str, years: int) -> pd.DataFrame:
     start = end - pd.DateOffset(years=years)
 
     try:
-        df = yf.download(symbol, start=start, end=end, progress=False)
+        df = yf.download(symbol, start=start, end=end, progress=False, auto_adjust=False)
 
         if df is None or df.empty:
             return pd.DataFrame()
 
-        # --- FIX FOR MULTI-INDEX (yfinance bug) ---
         if isinstance(df.columns, pd.MultiIndex):
-            df = df.swaplevel(axis=1)  # bring ticker inside
+            df = df.swaplevel(axis=1)
             df = df.loc[:, (symbol, ["Open", "High", "Low", "Close", "Volume"])]
             df.columns = ["Open", "High", "Low", "Close", "Volume"]
 
-        # Another safety: if any column is 2D → flatten
         for col in ["Open", "High", "Low", "Close", "Volume"]:
             if col in df and hasattr(df[col], "values") and df[col].values.ndim > 1:
                 df[col] = df[col].iloc[:, 0]  # take the first column
@@ -94,7 +92,6 @@ def fetch_history(symbol: str, years: int) -> pd.DataFrame:
 
 def build_features(df):
     df = df.copy()
-    # Ensure Close is 1D series, not 2D array
     df["Close"] = pd.to_numeric(df["Close"], errors='coerce')
     df["Open"] = pd.to_numeric(df["Open"], errors='coerce')
     df["High"] = pd.to_numeric(df["High"], errors='coerce')

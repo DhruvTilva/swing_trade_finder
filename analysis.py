@@ -1,7 +1,3 @@
-"""Run inference: scan stocks from CSV only,
-predict upsides using trained ML model,
-return 1 highest positive & 1 highest negative momentum stock.
-"""
 import os
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from typing import List, Dict, Tuple
@@ -18,9 +14,7 @@ from config import (
 )
 from sentiment import get_sentiment_for_symbol
 
-# =======================
 # MODEL LOADING
-# =======================
 MODEL_PATH = os.path.join(MODELS_DIR, "swing_model.pkl")
 
 if not os.path.exists(MODEL_PATH):
@@ -33,10 +27,7 @@ FEATURE_COLS = [
     "ma_ratio_5_20", "rsi_14", "atr_14",
 ]
 
-# =======================
 # SYMBOL LOADING (CSV ONLY)
-# =======================
-
 def load_symbols() -> List[str]:
     df = pd.read_csv("data/nse_symbols.csv")
     symbols = []
@@ -53,10 +44,7 @@ def load_symbols() -> List[str]:
     return symbols
 
 
-# =======================
 # DATA FETCHING
-# =======================
-
 def fetch_recent_history(symbol: str, days: int) -> pd.DataFrame:
     end = pd.Timestamp.today()
     start = end - pd.Timedelta(days=days)
@@ -98,9 +86,7 @@ def fetch_recent_history(symbol: str, days: int) -> pd.DataFrame:
 
     return pd.DataFrame()
 
-# =======================
 # FEATURE ENGINEERING
-# =======================
 def build_features_latest(df: pd.DataFrame):
     df = df.copy()
 
@@ -125,9 +111,7 @@ def build_features_latest(df: pd.DataFrame):
     last = df.iloc[-1]
     return last[FEATURE_COLS], float(last["Close"]), float(last["atr_14"])
 
-# =======================
 # SINGLE SYMBOL ANALYSIS
-# =======================
 
 def analyze_symbol(symbol: str) -> Dict:
     print(f"Analyzing: {symbol}")
@@ -160,9 +144,7 @@ def analyze_symbol(symbol: str) -> Dict:
     # Sentiment
     sentiment = get_sentiment_for_symbol(symbol)
 
-    # -----------------------------
     # Target & Stop Loss (ATR based)
-    # -----------------------------
     target_90d = round(last_price * (1 + up_90 / 100), 2)
     stop_loss = round(last_price - (1.5 * atr_last), 2)
 
@@ -170,9 +152,7 @@ def analyze_symbol(symbol: str) -> Dict:
     if stop_loss <= 0:
         stop_loss = round(last_price * 0.9, 2)
 
-    # -----------------------------
     # Rationale (simple & explainable)
-    # -----------------------------
     if up_30 > 0:
         rationale = "Positive ML momentum with upward trend"
     else:
@@ -193,9 +173,7 @@ def analyze_symbol(symbol: str) -> Dict:
         "rationale": rationale,
     }
 
-# =======================
 # MAIN ANALYSIS (CSV → 2 STOCKS)
-# =======================
 def analyze_all_stocks() -> Tuple[List[Dict], List[Dict]]:
     symbols = load_symbols()
     results: List[Dict] = []
@@ -217,6 +195,21 @@ def analyze_all_stocks() -> Tuple[List[Dict], List[Dict]]:
     top_positive["rationale"] = "Strongest positive ML momentum 30 Days (relative)"
     top_negative["rationale"] = "Weakest / negative ML momentum 30 Days (relative)"
     return [top_positive, top_negative], results
+
+def analyze_all_csv_stocks():
+    """
+    Analyze ALL stocks from CSV and return full report
+    """
+    symbols = load_symbols()
+    results = []
+
+    for sym in symbols:
+        r = analyze_symbol(sym)
+        if r is not None:
+            results.append(r)
+
+    return results
+
 
 if __name__ == "__main__":
     top, _ = analyze_all_stocks()
