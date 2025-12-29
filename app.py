@@ -3,6 +3,8 @@ from apscheduler.schedulers.background import BackgroundScheduler
 from analysis import analyze_all_stocks
 from notifications import notify_analysis_done
 from config import SCHEDULE_HOUR, SCHEDULE_MINUTE
+from notifications import notify_analysis_done
+
 
 app = Flask(__name__)
 LATEST_RESULTS = []
@@ -45,7 +47,7 @@ def analyze_all():
             "status": "empty",
             "message": "No valid stocks found"
         })
-
+    notify_analysis_done(results) 
     return jsonify({
         "status": "ok",
         "data": results
