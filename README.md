@@ -1,21 +1,97 @@
+<p align="center">
+  <img src="https://media.giphy.com/media/xUPGcEliCc7bETyfO8/giphy.gif" width="700"/>
+</p>
 
-SwingBot ML – Full NSE/BSE Swing Scanner (Educational)
+<h1 align="center">📊 SwingBot ML</h1>
+<h3 align="center">Full NSE / BSE Swing Trading Scanner (Educational)</h3>
 
-1. Create venv:
-   python3 -m venv venv
-   source venv/bin/activate  (Linux/mac)
-   venv\Scripts\activate   (Windows)
+<p align="center">
+  <img src="https://img.shields.io/badge/Market-NSE%20%7C%20BSE-blue?style=for-the-badge"/>
+  <img src="https://img.shields.io/badge/AI-ML%20Powered-purple?style=for-the-badge"/>
+  <img src="https://img.shields.io/badge/Python-Flask-green?style=for-the-badge"/>
+  <img src="https://img.shields.io/badge/Status-Educational-orange?style=for-the-badge"/>
+</p>
 
-2. Install deps:
-   pip install -r requirements.txt
+<p align="center">
+📉 <b>Data checked. Emotions ignored.</b> 📊
+</p>
 
-3. (Optional) Replace data/bse_symbols.csv with full BSE list.
+---
 
-4. Train model:
-   python model_train.py
+## 🚀 Project Overview
 
-5. Run web app:
-   python app.py
+**SwingBot ML** is an **AI-powered swing trading scanner** that analyzes **NSE & BSE stocks** using:
 
-6. Open browser:
-   http://127.0.0.1:5000
+- 📈 Historical market data  
+- 📊 Technical indicators  
+- 🤖 Machine Learning models  
+- 🧠 AI-based decision logic  
+
+This project is built for **learning, experimentation, and AI/FinTech portfolio showcase**.
+
+> ⚠️ No blind trust.  
+> 📊 Data over emotions.
+
+---
+
+## 🧠 How the AI Model Works
+
+<p align="center">
+  <img src="https://media.giphy.com/media/l41lFw057lAJQMwg0/giphy.gif" width="450"/>
+</p>
+
+SwingBot ML follows a **multi-layer analysis pipeline**:
+
+- Full **OHLCV historical data**
+- Technical indicators (trend, momentum, volatility)
+- ML model trained on past price behavior
+- AI logic to reduce emotional bias
+- Probability-based filtering
+
+> 🚨 This model does **NOT guarantee profits**  
+> It evaluates **patterns & probabilities**, not certainty.
+
+---
+
+## 🔥 Key Features
+
+<p align="center">
+  <img src="https://media.giphy.com/media/26AHONQ79FdWZhAI0/giphy.gif" width="420"/>
+</p>
+
+- ✅ NSE & BSE stock scanning  
+- ✅ ML-based swing signal detection  
+- ✅ Technical + AI blended analysis  
+- ✅ Lightweight Flask web app  
+- ✅ Fully extendable & customizable  
+
+---
+
+## ⚙️ Installation & Setup
+python3 -m venv venv
+source venv/bin/activate   # Linux / macOS
+venv\Scripts\activate      # Windows
+pip install -r requirements.txt
+data/bse_symbols.csv
+python model_train.py
+python app.py
+
+📊 Supported Markets
+<p align="center"> <img src="https://media.giphy.com/media/xT9IgzoKnwFNmISR8I/giphy.gif" width="420"/> </p>
+🇮🇳 NSE
+
+🤖 Let’s Test the AI Model Together
+Drop stock names, observe results, validate patterns, and learn how AI reacts to real market data.
+🧠 Trust data
+👀 Question outputs
+❌ Avoid blind faith
+
+⚠️ Disclaimer
+🚨 Educational Purpose Only
+This project is NOT financial advice
+Stock market investments carry risk
+Always do your own research
+The author is not responsible for profits or losses
+
+👤 Owner
+<p align="center"> <img src="https://media.giphy.com/media/QBd2kLB5qDmysEXre9/giphy.gif" width="180"/> </p> <h3 align="center">Dhruv T. ✨</h3> <p align="center"> Built with curiosity. Powered by data. Tested without emotions. </p> ```
