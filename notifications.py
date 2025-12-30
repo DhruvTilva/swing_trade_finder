@@ -132,5 +132,10 @@ def notify_analysis_done(stocks: List[Dict], chunk_size: int = 5) -> None:
         send_telegram(chunk_msg)
     # send_telegram("✨ Better luck next candle 😉\n— DT 🤖")
     # send_telegram("📉 Market was moody today 😄\n— DT 🤖")
-    send_telegram("📊 📉 Data checked. Emotions ignored.📊 📉 \n \n —✨ Thank's From D.T.")
+    send_telegram(
+        "📊 📉 Data checked. Emotions ignored.\n\n"
+        "*—✨ Thank's From D.T.*\n\n"
+        "_Note: Disclaimer alert 🚨\n"
+        "Don’t go blind-faith mode on these stocks — I’m still squinting myself 👀📊_"
+    )
 
