@@ -8,10 +8,8 @@ MODELS_DIR = os.path.join(BASE_DIR, "models")
 
 NSE_SYMBOLS_CSV = os.path.join(DATA_DIR, "nse_symbols.csv")
 BSE_SYMBOLS_CSV = os.path.join(DATA_DIR, "bse_symbols.csv")
-# 8563895754:AAGewZSTrI_8hxeI670qVCzWoJ68f4b8UF4
 TOP_N = 5
 LOOKBACK_DAYS = 180
-# -1003636114116
 TRAIN_YEARS = 3
 TRAIN_SYMBOL_LIMIT = 200
 
